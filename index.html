@@ -131,6 +131,40 @@
             border-radius: 20px;
             cursor: pointer;
         }
+
+        #timer {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        /* The "Fail" Animation */
+        @keyframes flashRed {
+            0% {
+                background: #1e293b;
+            }
+
+            50% {
+                background: #7f1d1d;
+            }
+
+            /* Dark red */
+            100% {
+                background: #1e293b;
+            }
+        }
+
+        .flash-red {
+            animation: flashRed 0.5s ease-in-out 2;
+            border-color: #ef4444 !important;
+        }
+
+        .card.matched {
+            background: #10b981 !important;
+            /* Green for success */
+            border: none;
+        }
     </style>
 </head>
 
@@ -159,10 +193,10 @@
         </div>
 
         <div id="game-container">
-            <h3>JS Logic Challenge</h3>
-            <p style="font-size: 0.8rem;">Match the Tech Stacks!</p>
+            <h3>JS Speed Challenge</h3>
+            <div id="timer">Time: 30s</div>
             <div id="grid"></div>
-            <button id="reset-btn" onclick="setupGame()">Reset Game</button>
+            <p id="game-msg" style="font-size: 0.8rem; height: 1.2rem;"></p>
         </div>
     </div>
 
@@ -171,39 +205,63 @@
     const emojis = ['⚛️', '🚀', '🤖', '💾', '⚛️', '🚀', '🤖', '💾'];
     let flippedCards = [];
     let matchedCount = 0;
+    let timeLeft = 30;
+    let timerId = null;
+    let gameActive = false;
 
     function setupGame() {
         const grid = document.getElementById('grid');
+        const timerDisplay = document.getElementById('timer');
+        const container = document.getElementById('game-container');
+
+        // Reset States
         grid.innerHTML = '';
         matchedCount = 0;
-        const shuffled = emojis.sort(() => 0.5 - Math.random());
+        timeLeft = 30;
+        gameActive = true;
+        flippedCards = [];
+        timerDisplay.innerText = `Time: ${timeLeft}s`;
+        container.classList.remove('flash-red');
 
-        shuffled.forEach((emoji, index) => {
+        const shuffled = emojis.sort(() => 0.5 - Math.random());
+        shuffled.forEach(emoji => {
             const card = document.createElement('div');
             card.classList.add('card');
             card.dataset.value = emoji;
             card.onclick = () => flipCard(card);
             grid.appendChild(card);
         });
+
+        // Start Timer
+        clearInterval(timerId);
+        timerId = setInterval(() => {
+            timeLeft--;
+            timerDisplay.innerText = `Time: ${timeLeft}s`;
+            if (timeLeft <= 0) {
+                gameOver(false);
+            }
+        }, 1000);
     }
 
     function flipCard(card) {
-        if (flippedCards.length < 2 && !card.classList.contains('flipped')) {
-            card.classList.add('flipped');
-            card.innerText = card.dataset.value;
-            flippedCards.push(card);
+        if (!gameActive || flippedCards.length >= 2 || card.classList.contains('flipped')) return;
 
-            if (flippedCards.length === 2) {
-                setTimeout(checkMatch, 500);
-            }
+        card.classList.add('flipped');
+        card.innerText = card.dataset.value;
+        flippedCards.push(card);
+
+        if (flippedCards.length === 2) {
+            setTimeout(checkMatch, 500);
         }
     }
 
     function checkMatch() {
         const [c1, c2] = flippedCards;
         if (c1.dataset.value === c2.dataset.value) {
+            c1.classList.add('matched');
+            c2.classList.add('matched');
             matchedCount += 2;
-            if (matchedCount === emojis.length) alert("Hope To Here From You Soon.");
+            if (matchedCount === emojis.length) gameOver(true);
         } else {
             c1.classList.remove('flipped');
             c2.classList.remove('flipped');
@@ -211,6 +269,19 @@
             c2.innerText = '';
         }
         flippedCards = [];
+    }
+
+    function gameOver(win) {
+        gameActive = false;
+        clearInterval(timerId);
+        const container = document.getElementById('game-container');
+
+        if (win) {
+            alert("Logic Master! Let's talk about a role.");
+        } else {
+            container.classList.add('flash-red');
+            setTimeout(setupGame, 1500); // Reset after flashing
+        }
     }
 
     setupGame();
