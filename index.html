@@ -20,13 +20,17 @@
             align-items: center;
             padding: 2rem 1rem;
             margin: 0;
+            text-align: center;
         }
         .profile-img {
             width: 100px;
             height: 100px;
             border-radius: 50%;
             border: 3px solid var(--accent);
-            margin-bottom: 1rem;
+            margin: 0 auto 1.5rem auto; /* Centers horizontally and adds bottom spacing */
+            display: block;
+            object-fit: cover; /* This is crucial: it crops the image to a circle without stretching it */
+            background-color: var(--card); /* Fallback color while image loads */
         }
         h1 { margin: 0; font-size: 1.5rem; }
         p { color: #94a3b8; margin-top: 0.5rem; text-align: center; max-width: 300px; }
@@ -65,21 +69,21 @@
 </head>
 <body>
 
-    <div class="profile-img"></div> 
+    <div src="Chinonso.jpg" alt="Chinonso Mitchel" class="profile-img"></div> 
     
     <h1>Mitchel C. Mbagha</h1>
     <p>MSc BIM Student & JavaScript Developer specializing in Vanilla JavaScript, Node.js, and 3D Model integration.</p>
 
     <div class="links-container">
-        <a href="YOUR_GOOGLE_DRIVE_PDF_LINK" class="link-card primary">📄 Download My CV (PDF)</a>
+        <a href="https://drive.google.com/file/d/1cCBWXtGbaSGiOGB6nA1cPbhqFutiA290/view?usp=drive_link" class="link-card primary">📄 Download My CV (PDF)</a>
         
-        <a href="https://github.com/YOUR_USERNAME" class="link-card">💻 GitHub Portfolio</a>
+        <a href="https://github.com/ProgrammeMitch" class="link-card">💻 GitHub Portfolio</a>
         <a href="https://www.linkedin.com/in/dev-mitchel-mbagha/" class="link-card fa-brands fa-linkedin">🔗 LinkedIn Profile</a>
         
         <div style="text-align: center; margin-top: 2rem;">
             <h3>Top Skills</h3>
             <span class="tag">JavaScript (ES6+)</span>
-            <span class="tag">React.js</span>
+            <span class="tag">ThreeJS</span>
             <span class="tag">Node.js</span>
             <span class="tag">REST APIs</span>
             <span class="tag">Git</span>
