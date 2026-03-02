@@ -275,12 +275,24 @@
         gameActive = false;
         clearInterval(timerId);
         const container = document.getElementById('game-container');
+        const msg = document.getElementById('game-msg');
 
         if (win) {
-            alert("Logic Master! Let's talk about a role.");
+            msg.innerText = "🏆 Great Job.";
+            msg.style.color = "#10b981";
+            // Wait 3 seconds so they see the win, then reset for the next person
+            setTimeout(() => {
+                msg.innerText = "";
+                setupGame();
+            }, 3000);
         } else {
             container.classList.add('flash-red');
-            setTimeout(setupGame, 1500); // Reset after flashing
+            //msg.innerText = "⌛ Time's up! Try again...";
+            //msg.style.color = "#ef4444";
+            setTimeout(() => {
+                msg.innerText = "";
+                setupGame();
+            }, 1500);
         }
     }
 
