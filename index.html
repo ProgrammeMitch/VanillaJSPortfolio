@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinonso Mitchel | JS Developer</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f8fafc;
+            --accent: #38bdf8;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+            margin: 0;
+        }
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            margin-bottom: 1rem;
+        }
+        h1 { margin: 0; font-size: 1.5rem; }
+        p { color: #94a3b8; margin-top: 0.5rem; text-align: center; max-width: 300px; }
+        
+        .links-container {
+            width: 100%;
+            max-width: 400px;
+            margin-top: 2rem;
+        }
+        .link-card {
+            background: var(--card);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            transition: transform 0.2s;
+            border: 1px solid #334155;
+        }
+        .link-card:active { transform: scale(0.98); }
+        .link-card.primary { background: var(--accent); color: var(--bg); }
+        
+        .tag {
+            font-size: 0.7rem;
+            background: #334155;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin: 5px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-img"></div> 
+    
+    <h1>Chinonso Mitchel</h1>
+    <p>MSc Student & JavaScript Developer specializing in React, Node.js, and AI integration.</p>
+
+    <div class="links-container">
+        <a href="YOUR_GOOGLE_DRIVE_PDF_LINK" class="link-card primary">📄 Download My CV (PDF)</a>
+        
+        <a href="https://github.com/YOUR_USERNAME" class="link-card">💻 GitHub Portfolio</a>
+        <a href="https://linkedin.com/in/YOUR_PROFILE" class="link-card">🔗 LinkedIn Profile</a>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <h3>Top Skills</h3>
+            <span class="tag">JavaScript (ES6+)</span>
+            <span class="tag">React.js</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">REST APIs</span>
+            <span class="tag">Git</span>
+        </div>
+    </div>
+
+</body>
+</html>
